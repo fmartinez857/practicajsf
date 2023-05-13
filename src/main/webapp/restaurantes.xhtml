@@ -1,35 +1,57 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-    
-<h:head>  
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
 	<title>Pantalla Restaurantes</title>
 	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 </h:head>
 
 <h:body>
-		
+
 	<!-- ::::::::::::: AGREGA AQUI LA TABLA DE RESTAURANTES ::::::::::::::::::: -->
-	<h:dataTable id="tblRestaurantes" var="restaurante" value="#{restauranteController.restaurantes}" headerClass="headerTable" rowClasses="rowTable rowTableLine">
-     		<h:column>
-     			<f:facet name="header">Nombre</f:facet>
-     			<h:outputLabel value="#{restaurante.nombre}"></h:outputLabel>
-     		</h:column>
-     		<h:column>
-     			<f:facet name="header">Direccion</f:facet>
-     			<h:outputLabel value="#{restaurante.direccion}"></h:outputLabel>
-     		</h:column>
-     		<h:column>
-     			<f:facet name="header">Pais</f:facet>
-     			<h:outputLabel value="#{restaurante.pais}"></h:outputLabel>
-     		</h:column>
-     		<h:column>
-     			<f:facet name="header">Gerente</f:facet>
-     			<h:outputLabel value="#{restaurante.gerente.nombre}"></h:outputLabel>
-     		</h:column>
-     		
-     		
-     	</h:dataTable>
+	<h:form>
+	<p:dataTable id="tblRestaurantes" var="restaurante" paginator="true"
+		rows="10" reflow="true"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+		rowsPerPageTemplate="5,10,{ShowAll|'All'}"
+		emptyMessage="No se encontraron registros"
+		value="#{restauranteController.restaurantes}"
+		filteredValue="#{restauranteController.restaurantesFiltrados}">
+
+
+
+		<p:column headerText="Nombre" filterBy="#{restaurante.nombre}"
+			filterMatchMode="contains" sortBy="#{restaurante.nombre}">
+
+			<h:outputLabel value="#{restaurante.nombre}"></h:outputLabel>
+		</p:column>
+
+		<p:column headerText="Direccion" filterBy="#{restaurante.direccion}"
+			filterMatchMode="contains" sortBy="#{restaurante.direccion}">
+
+			<h:outputLabel value="#{restaurante.direccion}"></h:outputLabel>
+		</p:column>
+
+
+		<p:column headerText="Pais" filterBy="#{restaurante.pais}"
+			filterMatchMode="contains" sortBy="#{restaurante.pais}">
+
+			<h:outputLabel value="#{restaurante.pais}"></h:outputLabel>
+		</p:column>
+
+		<p:column headerText="Gerente"
+			filterBy="#{restaurante.gerente.nombre}" filterMatchMode="contains"
+			sortBy="#{restaurante.gerente.nombre}">
+
+			<h:outputLabel value="#{restaurante.gerente.nombre}"></h:outputLabel>
+		</p:column>
+
+
+	</p:dataTable>
+	</h:form>
 
 </h:body>
 

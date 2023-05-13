@@ -19,6 +19,16 @@ public class RestauranteController {
 	 */
 	private List<Restaurante> restaurantes;
 	
+	private List<Restaurante> restaurantesFiltrados;
+	
+	public List<Restaurante> getRestaurantesFiltrados() {
+		return restaurantesFiltrados;
+	}
+
+	public void setRestaurantesFiltrados(List<Restaurante> restaurantesFiltrados) {
+		this.restaurantesFiltrados = restaurantesFiltrados;
+	}
+
 	/**
 	 * Servicio con los metodos que realizan la logica de negocio de empleados.
 	 */
